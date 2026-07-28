@@ -31,7 +31,6 @@
 
 ## 🏗️ 3. 시스템 아키텍처 (Architecture)
 
-```text
 [ GitHub Actions Cron Trigger ] ➔ 매일 KST 08:30 / 15:40
            │
            ▼
@@ -53,20 +52,22 @@
            ▼
 [ User's KakaoTalk App Notification ]
 
----
+--
 
 ## 🔒 4. 보안 및 환경변수 설정 (Security & Setup)
 
 Public 저장소 공개 시 보안 유지를 위해 아래와 같이 환경변수를 분리하여 세팅합니다.
 
 ### 4.1. GitHub Secrets 등록
+
 1. Repository **Settings** > **Secrets and variables** > **Actions** 이동
 2. `New repository secret` 클릭:
    * **Name**: `KAKAO_TOKEN`
    * **Secret**: 카카오 디벨로퍼스에서 발급받은 Access Token 값 입력
 
 ### 4.2. 로컬 실행 방법 (Windows CMD)
-```cmd
+
+cmd
 set KAKAO_TOKEN=내_카카오_액세스_토큰_값
 python stock_briefing.py
 
