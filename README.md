@@ -52,8 +52,6 @@
            ▼
 [ User's KakaoTalk App Notification ]
 
----
-
 ## 🚀 8. 향후 확장 계획 (Future Roadmap: QATE Project)
 
 > **단순 알림 파이프라인을 넘어, 자율적 분석 및 체결이 가능한 퀀트 트레이딩 엔진(QATE)으로의 진화 로드맵**
