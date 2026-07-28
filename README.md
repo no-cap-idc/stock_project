@@ -31,6 +31,7 @@
 
 ## 🏗️ 3. 시스템 아키텍처 (Architecture)
 
+text
 [ GitHub Actions Cron Trigger ] ➔ 매일 KST 08:30 / 15:40
            │
            ▼
@@ -52,7 +53,7 @@
            ▼
 [ User's KakaoTalk App Notification ]
 
---
+---
 
 ## 🔒 4. 보안 및 환경변수 설정 (Security & Setup)
 
