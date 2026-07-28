@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import requests
 import yfinance as yf
 from bs4 import BeautifulSoup
@@ -107,28 +108,28 @@ def send_kakao_message(text_message):
     return res.json()
 
 if __name__ == "__main__":
-    print("🔄 [방법 B] 뉴스타입 보완 후 수집 중...")
+    print("🔄 데이터 수집 및 3개 메시지 분할 전송 시작...")
     
+    # 1. 데이터 수집
     indices_info = get_market_indices()
     stocks_info = get_my_stock_status()
+    news_info = get_stock_news(["삼성전자", "미래에셋증권", "삼성중공업"])
     
-    # 대표 보유 종목 3개에 대한 최신 뉴스 수집
-    news_keywords = ["삼성전자", "미래에셋증권", "삼성중공업"]
-    news_info = get_stock_news(news_keywords)
+    # 2. 메시지 영역별 3개로 분할 작성
+    msg_1 = f"📊 [1. 주요 시장 지수]\n\n{indices_info}"
+    msg_2 = f"📈 [2. 내 보유 종목 현황]\n\n{stocks_info}"
+    msg_3 = f"📰 [3. 주요 종목 최신 뉴스]\n\n{news_info}"
     
-    msg_body = (
-        f"📊 [종합 리포트] 주식 브리핑\n\n"
-        f"[1. 주요 시장 지수]\n{indices_info}\n\n"
-        f"[2. 내 보유 종목 현황]\n{stocks_info}\n\n"
-        f"[3. 주요 종목 최신 뉴스]\n{news_info}"
-    )
+    messages = [msg_1, msg_2, msg_3]
     
-    print("\n--- [전송될 메시지 내용] ---")
-    print(msg_body)
-    print("---------------------------\n")
-    
-    res = send_kakao_message(msg_body)
-    if res.get("result_code") == 0:
-        print("✅ 성공적으로 방법 B(뉴스 포함) 브리핑이 발송되었습니다!")
-    else:
-        print("❌ 카카오톡 발송 실패:", res)
+    # 3. 순서대로 각 메시지 전송 (순서 보장을 위해 1초 간격 대기)
+    for i, msg in enumerate(messages, 1):
+        res = send_kakao_message(msg)
+        if res.get("result_code") == 0:
+            print(f"✅ [{i}/3] 메시지 전송 성공!")
+        else:
+            print(f"❌ [{i}/3] 메시지 전송 실패:", res)
+        
+        # 메시지 수신 순서가 꼬이지 않도록 1초간 대기
+        if i < len(messages):
+            time.sleep(1)
