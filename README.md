@@ -9,6 +9,7 @@
 ---
 
 ## 📌 1. 프로젝트 개요 (Overview)
+
 매일 장 시작 전(08:30)과 장 마감 후(15:40)에 **주요 시장 지수(코스피/코스닥/나스닥)**, **개인 보유 종목의 평단 대비 실시간 수익률**, 그리고 **Google News 최신 헤드라인**을 수집하여 카카오톡 나에게 보내기 메시지로 자동 전송하는 클라우드 자동화 프로젝트입니다.
 
 * **운영 비용 $0**: 별도의 24시간 개인 서버나 NAS 구축 없이 **GitHub Actions**로 동작.
@@ -29,25 +30,3 @@
 ---
 
 ## 🏗️ 3. 시스템 아키텍처 (Architecture)
-
-```text
-[ GitHub Actions Cron Trigger ] ➔ 매일 KST 08:30 / 15:40
-           │
-           ▼
-[ Ubuntu Cloud Runner (GitHub) ]
-           │
-           ├── 1. Repository Checkout & Python 3.10 Setup
-           ├── 2. Dependecy Install (`requirements.txt`)
-           ├── 3. Inject KAKAO_TOKEN from `GitHub Secrets`
-           │
-           ▼
-[ Executing `stock_briefing.py` ]
-           │
-           ├──► [yfinance API] ──► 지수 시세 및 보유종목 수익률 산출
-           ├──► [Google News RSS] ──► BeautifulSoup4 주요 기사 크롤링
-           │
-           ▼
-[ Kakao REST API Dispatch ]
-           │
-           ▼
-[ User's KakaoTalk App Notification ]
