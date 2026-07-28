@@ -31,27 +31,26 @@
 
 ## 🏗️ 3. 시스템 아키텍처 (Architecture)
 
-text
-[ GitHub Actions Cron Trigger ] ➔ 매일 KST 08:30 / 15:40
-           │
-           ▼
-[ Ubuntu Cloud Runner (GitHub) ]
-           │
-           ├── 1. Repository Checkout & Python 3.10 Setup
-           ├── 2. Dependecy Install (requirements.txt)
-           ├── 3. Inject KAKAO_TOKEN from GitHub Secrets
-           │
-           ▼
-[ Executing stock_briefing.py ]
-           │
-           ├──► [yfinance API] ──► 지수 시세 및 보유종목 수익률 산출
-           ├──► [Google News RSS] ──► BeautifulSoup4 주요 기사 크롤링
-           │
-           ▼
-[ Kakao REST API Dispatch ]
-           │
-           ▼
-[ User's KakaoTalk App Notification ]
+    [ GitHub Actions Cron Trigger ] ➔ 매일 KST 08:30 / 15:40
+               │
+               ▼
+    [ Ubuntu Cloud Runner (GitHub) ]
+               │
+               ├── 1. Repository Checkout & Python 3.10 Setup
+               ├── 2. Dependecy Install (requirements.txt)
+               ├── 3. Inject KAKAO_TOKEN from GitHub Secrets
+               │
+               ▼
+    [ Executing stock_briefing.py ]
+               │
+               ├──► [yfinance API] ──► 지수 시세 및 보유종목 수익률 산출
+               ├──► [Google News RSS] ──► BeautifulSoup4 주요 기사 크롤링
+               │
+               ▼
+    [ Kakao REST API Dispatch ]
+               │
+               ▼
+    [ User's KakaoTalk App Notification ]
 
 ---
 
@@ -60,7 +59,6 @@ text
 Public 저장소 공개 시 보안 유지를 위해 아래와 같이 환경변수를 분리하여 세팅합니다.
 
 ### 4.1. GitHub Secrets 등록
-
 1. Repository **Settings** > **Secrets and variables** > **Actions** 이동
 2. `New repository secret` 클릭:
    * **Name**: `KAKAO_TOKEN`
@@ -68,45 +66,44 @@ Public 저장소 공개 시 보안 유지를 위해 아래와 같이 환경변�
 
 ### 4.2. 로컬 실행 방법 (Windows CMD)
 
-cmd
-set KAKAO_TOKEN=내_카카오_액세스_토큰_값
-python stock_briefing.py
+    set KAKAO_TOKEN=내_카카오_액세스_토큰_값
+    python stock_briefing.py
 
 ---
 
-## 5. 프로젝트 디렉터리 구조
+## 📁 5. 프로젝트 디렉토리 구조 (Directory Structure)
 
-stock_project/
-├── .github/
-│   └── workflows/
-│       └── stock_alarm.yml   # GitHub Actions 스케줄러 설정 파일
-├── stock_briefing.py         # 주가 수집, 수익률 계산 및 카카오톡 전송 메인 스크립트
-├── requirements.txt          # 필요 파이썬 의존성 라이브러리 목록
-└── README.md                 # 프로젝트 기술 문서
+    stock_project/
+    ├── .github/
+    │   └── workflows/
+    │       └── stock_alarm.yml   # GitHub Actions 스케줄러 설정 파일
+    ├── stock_briefing.py         # 주가 수집, 수익률 계산 및 카카오톡 전송 메인 스크립트
+    ├── requirements.txt          # 필요 파이썬 의존성 라이브러리 목록
+    └── README.md                 # 프로젝트 기술 문서
 
 ---
 
-## 6. 실행 화면 예시
+## 🚀 6. 실행 화면 예시 (Notification Preview)
 
-📊 [1. 주요 시장 지수]
+    📊 [1. 주요 시장 지수]
 
-- 코스피: 2,750.12 (🔺+0.85%)
-- 코스닥: 890.45 (🔻-0.32%)
-- 나스닥: 16,400.10 (🔺+1.20%)
+    - 코스피: 2,750.12 (🔺+0.85%)
+    - 코스닥: 890.45 (🔻-0.32%)
+    - 나스닥: 16,400.10 (🔺+1.20%)
 
-📈 [2. 내 보유 종목 현황]
+    📈 [2. 내 보유 종목 현황]
 
-▪️ 삼성전자
-  현재가: 78,500원 (🔺+1.16%)
-  수익률: 🔥 +12.35% (평단: 69,800원)
+    ▪️ 삼성전자
+      현재가: 78,500원 (🔺+1.16%)
+      수익률: 🔥 +12.35% (평단: 69,800원)
 
-▪️ TIGER 미국나스닥100
-  현재가: 185,200원 (🔺+0.90%)
-  수익률: 🔥 +5.40% (평단: 175,711원)
+    ▪️ TIGER 미국나스닥100
+      현재가: 185,200원 (🔺+0.90%)
+      수익률: 🔥 +5.40% (평단: 175,711원)
 
-📰 [3. 주요 종목 최신 뉴스]
+    📰 [3. 주요 종목 최신 뉴스]
 
-📰 [삼성전자] 삼성전자, 차세대 반도체 공급 계약 체결...
+    📰 [삼성전자] 삼성전자, 차세대 반도체 공급 계약 체결...
 
 ---
 
